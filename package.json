@@ -15,6 +15,7 @@
     "db:migrate": "npx prisma migrate dev",
     "db:studio": "npx prisma studio",
     "db:seed": "ts-node scripts/migrate-json-to-db.ts",
+    "admin:reset-password": "node scripts/reset-admin-password.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:unit": "vitest run tests/unit",

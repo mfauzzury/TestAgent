@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   Plus, Upload, Download, Play, Pencil, Trash2,
   Inbox, FolderOpen, BarChart2, X, Loader,
-  CheckCircle2, ChevronLeft, ExternalLink, Tag, Clock, Search, Settings,
+  CheckCircle2, ChevronLeft, ExternalLink, Clock, Search, Settings,
   Folder, FolderOpen as FolderOpenIcon, ChevronRight, ChevronDown, ChevronUp, Image, BookOpen,
 } from "lucide-react";
 import * as api from "../lib/api";
@@ -140,18 +140,6 @@ export function LibraryContent({ projectId, embedded = false }: { projectId: str
     updateGroupMut.mutate({ id: a.id, sortOrder: aOrder });
     updateGroupMut.mutate({ id: b.id, sortOrder: bOrder });
   }, [groups, updateGroupMut]);
-
-  const { data: members = [] } = useQuery({
-    queryKey: ["members", effectiveProjectId],
-    queryFn: () => api.getMembers(effectiveProjectId),
-    enabled: !!effectiveProjectId,
-  });
-
-  const { data: roles = [] } = useQuery<api.ProjectRole[]>({
-    queryKey: ["roles", effectiveProjectId],
-    queryFn: () => api.getRoles(effectiveProjectId),
-    enabled: !!effectiveProjectId,
-  });
 
   const invalidate = useCallback(() => qc.invalidateQueries({ queryKey: ["projects"] }), [qc]);
 

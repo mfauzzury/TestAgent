@@ -40,7 +40,10 @@ async function makeMysqlClient(url: string): Promise<PrismaClient> {
  * there is no SQLite fallback. Configure the URL in App Settings → Database.
  */
 export async function initDb(): Promise<ActiveBackend> {
-  const url = process.env.MYSQL_DATABASE_URL || readDbUrlSync();
+  const url =
+    process.env.MYSQL_DATABASE_URL?.trim() ||
+    process.env.DATABASE_URL?.trim() ||
+    readDbUrlSync();
 
   console.log(`[db] connecting to MySQL…`);
   const mysql = await import("mysql2/promise");
